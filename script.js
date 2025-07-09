@@ -44,5 +44,8 @@ console.log(Set);
 const Ans = Set.filter((x)=>x.age>30).map((x)=>x.firstname);
 console.log(Ans);
 
+apply=we pass argukenmts  as array
+bind=we have to call the function manually
+
 
 
