@@ -1,0 +1,17 @@
+{
+  "name": "rahul-g5-package",
+  "version": "1.0.0",
+  "description": "this is my first npm pakage ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@changesets/cli": "^2.29.5"
+  },
+  "dependencies": {
+    "gitignore": "^0.7.0"
+  }
+}
