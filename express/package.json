@@ -1,18 +1,16 @@
 {
-  "name": "prisma_postgres",
+  "name": "express",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-  "devDependencies": {
-    "prisma": "^6.12.0"
-  },
   "dependencies": {
-    "@prisma/client": "^6.12.0"
+    "dotgitignore": "^2.1.0",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
   }
 }
