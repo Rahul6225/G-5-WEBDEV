@@ -11,6 +11,7 @@
   "dependencies": {
     "dotgitignore": "^2.1.0",
     "express": "^5.1.0",
+    "hbs": "^4.2.0",
     "nodemon": "^3.1.10"
   }
 }
