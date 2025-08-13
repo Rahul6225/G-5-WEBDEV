@@ -3,6 +3,7 @@ const User = require("../models/user.js");
 const userRouter = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { userAuth } = require("../middlewares/userAuth.js");
 
 userRouter.post("/signup", async (req, res) => {
   try {
@@ -58,6 +59,24 @@ userRouter.post("/login", async (req, res) => {
     // res.send("Login successfully"+token);
   } catch (err) {
     res.status(400).send(err.message);
+  }
+});
+
+
+
+userRouter.get("/profile",userAuth,async (req,res)=>{
+  try {
+      const user = req.user;
+      const isUser = await user.find(user);
+      if(!isUser){
+        res.status(400).send("Not found");
+      }
+
+      res.send(isUser);
+
+    
+  } 
+  catch (error) {
   }
 });
 

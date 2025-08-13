@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 
 const { ConnectDB } = require("./config/db.js");
 const userRouter = require("./routes/userRoutes.js");
+const { userAuth } = require("./middlewares/userAuth.js");
 
 
 dotenv.config();
@@ -20,24 +21,22 @@ const DATABASE_URL =
 const DATABASE_NAME = process.env.DATABASE_NAME || "Dev_Community";
 
 app.use("/",userRouter);
-app.use("/",userRouter);
-app.use("/", userRouter);
 
 app.get("/", (req, res) => {
   res.send("HOMEPAGE");
 });
 
-// app.get("/all-products", (req, res) => {
-//   try {
-//     const user = req.user;
-//     if (!user) {
-//      return res.send("It is protected Route");
-//     }
-//     res.send(user);
-//   } catch (error) {
-//     res.status(400).send(error.message);
-//   }
-// });
+app.get("/all-products", userAuth,(req, res) => {
+  try {
+    const user = req.user;
+    if (!user) {
+     return res.send("It is protected Route");
+    }
+    res.send(user);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
 
 ConnectDB()
   .then(() => {

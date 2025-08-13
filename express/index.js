@@ -4,12 +4,24 @@
 
 const express = require("express");
 const app = express();
-const PORT = 3000
+const PORT = 3000;
 const hbs = require("hbs");
 const path = require("path");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+// const upload = multer({ storage: storage });
 // const hbs = require("hbs");
 
 // Register partials
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "/tmp/my-uploads");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, file.fieldname + "-" + uniqueSuffix);
+  },
+});
 hbs.registerPartials(path.join(__dirname, "views", "partials"));
 // express.static('./public/');
 // app.use(express.static("./public"));
@@ -36,6 +48,18 @@ hbs.registerPartials(path.join(__dirname, "views", "partials"));
 
 app.set("view engine", "html");
 app.engine("html", require("hbs").__express);
+
+app.post("/profile", upload.single("avatar"), function (req, res, next) {
+  // res.send("Hello")
+  // next();
+  console.log(req.body);
+  res.redirect("/");
+});
+// app.post("/stats", upload.single("uploaded_file"), function (req, res) {
+
+//   console.log(req.file, req.body);
+// });
+
 
 app.get("/", (req, res) => {
   res.render("home.hbs", {
